@@ -1,0 +1,22 @@
+version: "3"
+services:
+ screenshot-service-dev:
+  restart: always
+  container_name: screenshot-service-dev
+  image: node:12
+  user: 'node'
+  networks:
+    disip-url-shortener_url-short-proxy:
+     ipv4_address: 172.27.0.9
+  working_dir: /home/node/app
+  environment:
+    - NODE_ENV=development
+  volumes:
+    - '/home/ubuntu/screenshot-service-dev:/home/node/app'
+  expose:
+    - '3005'
+  command: 'npm start'
+
+networks:
+ disip-url-shortener_url-short-proxy:
+    external: true
